@@ -1,0 +1,16 @@
+2025-05-10 11:10:04,800 - __main__ - ERROR - Missing dependency: No module named 'streamlit'
+2025-05-10 11:10:04,800 - __main__ - INFO - Please install all dependencies with: pip install -r requirements.txt
+2025-05-10 12:51:10,263 - __main__ - ERROR - Missing dependency: No module named 'streamlit'
+2025-05-10 12:51:10,263 - __main__ - INFO - Please install all dependencies with: pip install -r requirements.txt
+2025-05-10 12:54:04,379 - __main__ - INFO - All core dependencies are installed
+2025-05-10 12:54:04,380 - __main__ - INFO - Starting NEPSEZEN dashboard...
+2025-05-10 12:54:04,380 - __main__ - INFO - Running command: C:\Program Files\Python310\python.exe -m streamlit run C:\Users\N I T R O\Downloads\mockup\nepsezen\dashboard\dashboard.py
+2025-05-10 13:42:14,145 - __main__ - INFO - All core dependencies are installed
+2025-05-10 13:42:14,145 - __main__ - INFO - Starting NEPSEZEN dashboard...
+2025-05-10 13:42:14,145 - __main__ - INFO - Running command: C:\Program Files\Python310\python.exe -m streamlit run C:\Users\N I T R O\Downloads\mockup\nepsezen\dashboard\dashboard.py
+2025-05-10 13:55:23,123 - __main__ - INFO - All core dependencies are installed
+2025-05-10 13:55:23,123 - __main__ - INFO - Starting NEPSEZEN dashboard...
+2025-05-10 13:55:23,123 - __main__ - INFO - Running command: C:\Program Files\Python310\python.exe -m streamlit run C:\Users\N I T R O\Downloads\mockup\nepsezen\dashboard\dashboard.py
+2025-05-10 14:09:11,426 - __main__ - INFO - All core dependencies are installed
+2025-05-10 14:09:11,426 - __main__ - INFO - Starting NEPSEZEN dashboard...
+2025-05-10 14:09:11,426 - __main__ - INFO - Running command: C:\Program Files\Python310\python.exe -m streamlit run C:\Users\N I T R O\Downloads\mockup\nepsezen\dashboard\dashboard.py

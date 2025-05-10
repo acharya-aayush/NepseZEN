@@ -1,0 +1,1352 @@
+{
+    "NABIL": {
+        "company_name": "Nabil Bank Limited",
+        "sector": "Commercial Bank",
+        "listed_shares": 29499466,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 294994660,
+        "market_cap": 326791402.73,
+        "price": {
+            "open": 626.4,
+            "high": 636.28,
+            "low": 617.3,
+            "close": 620.07
+        },
+        "volume": 595174,
+        "eps": 42.97,
+        "pe_ratio": 20.25,
+        "circuit_status": "None"
+    },
+    "NLIC": {
+        "company_name": "Nepal Life Insurance Co. Ltd.",
+        "sector": "Life Insurance",
+        "listed_shares": 39121990,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 3912199000,
+        "market_cap": 6054826595.6,
+        "price": {
+            "open": 771.9,
+            "high": 776.36,
+            "low": 766.55,
+            "close": 774.19
+        },
+        "volume": 962214,
+        "eps": 53.26,
+        "pe_ratio": 16.17,
+        "circuit_status": "None"
+    },
+    "HBL": {
+        "company_name": "Himalayan Bank Ltd.",
+        "sector": "Commercial Bank",
+        "listed_shares": 12225175,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 1222517500,
+        "market_cap": 1800013145.23,
+        "price": {
+            "open": 721.84,
+            "high": 768.93,
+            "low": 719.36,
+            "close": 760.26
+        },
+        "volume": 714203,
+        "eps": 34.13,
+        "pe_ratio": 10.6,
+        "circuit_status": "Upper"
+    },
+    "NEPSE": {
+        "company_name": "Nepal Stock Exchange Ltd.",
+        "sector": "Exchange",
+        "listed_shares": 33991413,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 3399141300,
+        "market_cap": 3972957669.18,
+        "price": {
+            "open": 1425.09,
+            "high": 1463.8,
+            "low": 1420.81,
+            "close": 1455.77
+        },
+        "volume": 182712,
+        "eps": 71.23,
+        "pe_ratio": 12.68,
+        "circuit_status": "None"
+    },
+    "EIC": {
+        "company_name": "Everest Insurance Company",
+        "sector": "Non-Life Insurance",
+        "listed_shares": 25252702,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 25252702,
+        "market_cap": 41493723.6,
+        "price": {
+            "open": 522.07,
+            "high": 530.46,
+            "low": 512.37,
+            "close": 524.21
+        },
+        "volume": 830436,
+        "eps": 20.75,
+        "pe_ratio": 24.22,
+        "circuit_status": "None"
+    },
+    "BOKL": {
+        "company_name": "Bank of Kathmandu Limited",
+        "sector": "Commercial Bank",
+        "listed_shares": 31317284,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 3131728400,
+        "market_cap": 4539779172.54,
+        "price": {
+            "open": 1241.35,
+            "high": 1289.11,
+            "low": 1240.03,
+            "close": 1283.97
+        },
+        "volume": 786548,
+        "eps": 39.6,
+        "pe_ratio": 20.08,
+        "circuit_status": "None"
+    },
+    "NMB": {
+        "company_name": "NMB Bank Ltd.",
+        "sector": "Commercial Bank",
+        "listed_shares": 24883495,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 24883495,
+        "market_cap": 27600290.29,
+        "price": {
+            "open": 1277.28,
+            "high": 1313.91,
+            "low": 1267.82,
+            "close": 1305.87
+        },
+        "volume": 237245,
+        "eps": 32.24,
+        "pe_ratio": 15.71,
+        "circuit_status": "None"
+    },
+    "GHL": {
+        "company_name": "Greenhill Ltd.",
+        "sector": "Energy",
+        "listed_shares": 44449334,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 44449334,
+        "market_cap": 79219106.74,
+        "price": {
+            "open": 919.64,
+            "high": 964.19,
+            "low": 910.71,
+            "close": 962.5
+        },
+        "volume": 73214,
+        "eps": 78.13,
+        "pe_ratio": 17.33,
+        "circuit_status": "None"
+    },
+    "UBL": {
+        "company_name": "United Insurance Company",
+        "sector": "Non-Life Insurance",
+        "listed_shares": 10510990,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 105109900,
+        "market_cap": 126325692.15,
+        "price": {
+            "open": 771.02,
+            "high": 772.92,
+            "low": 751.49,
+            "close": 752.03
+        },
+        "volume": 121835,
+        "eps": 76.4,
+        "pe_ratio": 16.08,
+        "circuit_status": "None"
+    },
+    "SHEL": {
+        "company_name": "Shree Harsha Enterprises Ltd.",
+        "sector": "Industrial Goods",
+        "listed_shares": 24161289,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 2416128900,
+        "market_cap": 3862882505.73,
+        "price": {
+            "open": 1178.28,
+            "high": 1179.02,
+            "low": 1164.71,
+            "close": 1168.32
+        },
+        "volume": 873873,
+        "eps": 52.71,
+        "pe_ratio": 10.56,
+        "circuit_status": "None"
+    },
+    "SBBL": {
+        "company_name": "Siddhartha Bank Ltd.",
+        "sector": "Commercial Bank",
+        "listed_shares": 29779379,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 29779379,
+        "market_cap": 43062181.44,
+        "price": {
+            "open": 1027.82,
+            "high": 1075.18,
+            "low": 1018.93,
+            "close": 1072.48
+        },
+        "volume": 503531,
+        "eps": 24.79,
+        "pe_ratio": 14.03,
+        "circuit_status": "None"
+    },
+    "PRVU": {
+        "company_name": "Prabhu Insurance Ltd.",
+        "sector": "Non-Life Insurance",
+        "listed_shares": 16485338,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 1648533800,
+        "market_cap": 2456394916.34,
+        "price": {
+            "open": 576.6,
+            "high": 605.66,
+            "low": 575.49,
+            "close": 597.79
+        },
+        "volume": 371452,
+        "eps": 39.73,
+        "pe_ratio": 24.05,
+        "circuit_status": "None"
+    },
+    "LICN": {
+        "company_name": "Life Insurance Corporation Nepal",
+        "sector": "Life Insurance",
+        "listed_shares": 20389484,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 20389484,
+        "market_cap": 22573034.39,
+        "price": {
+            "open": 903.94,
+            "high": 959.94,
+            "low": 902.79,
+            "close": 952.52
+        },
+        "volume": 720883,
+        "eps": 72.32,
+        "pe_ratio": 13.12,
+        "circuit_status": "Upper"
+    },
+    "FMDBL": {
+        "company_name": "FMDBL Finance Ltd.",
+        "sector": "Finance",
+        "listed_shares": 31536259,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 315362590,
+        "market_cap": 612065652.52,
+        "price": {
+            "open": 1332.05,
+            "high": 1382.3,
+            "low": 1330.02,
+            "close": 1380.56
+        },
+        "volume": 76409,
+        "eps": 75.35,
+        "pe_ratio": 10.31,
+        "circuit_status": "None"
+    },
+    "GLH": {
+        "company_name": "Gurans Life Insurance",
+        "sector": "Life Insurance",
+        "listed_shares": 14445139,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 14445139,
+        "market_cap": 23568927.24,
+        "price": {
+            "open": 1293.71,
+            "high": 1308.69,
+            "low": 1287.3,
+            "close": 1299.44
+        },
+        "volume": 293522,
+        "eps": 43.37,
+        "pe_ratio": 12.79,
+        "circuit_status": "None"
+    },
+    "SCL": {
+        "company_name": "Sunrise Capital Ltd.",
+        "sector": "Finance",
+        "listed_shares": 29865747,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 2986574700,
+        "market_cap": 5914942196.58,
+        "price": {
+            "open": 1208.53,
+            "high": 1212.42,
+            "low": 1193.93,
+            "close": 1201.36
+        },
+        "volume": 856684,
+        "eps": 24.26,
+        "pe_ratio": 22.46,
+        "circuit_status": "None"
+    },
+    "RBCL": {
+        "company_name": "Rastriya Banijya Bank",
+        "sector": "Commercial Bank",
+        "listed_shares": 10208018,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 10208018,
+        "market_cap": 19910474.79,
+        "price": {
+            "open": 900.14,
+            "high": 901.57,
+            "low": 895.49,
+            "close": 897.14
+        },
+        "volume": 926044,
+        "eps": 44.29,
+        "pe_ratio": 20.55,
+        "circuit_status": "None"
+    },
+    "BFC": {
+        "company_name": "Bishal Finance",
+        "sector": "Finance",
+        "listed_shares": 21763048,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 217630480,
+        "market_cap": 234720381.23,
+        "price": {
+            "open": 813.44,
+            "high": 836.43,
+            "low": 811.28,
+            "close": 833.5
+        },
+        "volume": 352841,
+        "eps": 50.23,
+        "pe_ratio": 24.12,
+        "circuit_status": "None"
+    },
+    "HIML": {
+        "company_name": "Himalaya Airlines Limited",
+        "sector": "Aviation",
+        "listed_shares": 19153558,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 191535580,
+        "market_cap": 247954815.4,
+        "price": {
+            "open": 783.44,
+            "high": 825.47,
+            "low": 776.08,
+            "close": 817.29
+        },
+        "volume": 147061,
+        "eps": 69.26,
+        "pe_ratio": 14.44,
+        "circuit_status": "None"
+    },
+    "CLBS": {
+        "company_name": "Chaudhary Group",
+        "sector": "Conglomerate",
+        "listed_shares": 46027111,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 460271110,
+        "market_cap": 822306149.16,
+        "price": {
+            "open": 1204.9,
+            "high": 1256.05,
+            "low": 1204.17,
+            "close": 1246.49
+        },
+        "volume": 509805,
+        "eps": 69.86,
+        "pe_ratio": 10.82,
+        "circuit_status": "None"
+    },
+    "CBBL": {
+        "company_name": "Capital Bank Ltd.",
+        "sector": "Commercial Bank",
+        "listed_shares": 16457741,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 1645774100,
+        "market_cap": 2086418929.9,
+        "price": {
+            "open": 724.77,
+            "high": 757.11,
+            "low": 719.49,
+            "close": 747.67
+        },
+        "volume": 130594,
+        "eps": 64.85,
+        "pe_ratio": 21.44,
+        "circuit_status": "None"
+    },
+    "RBB": {
+        "company_name": "Rastriya Banijya Bank Ltd.",
+        "sector": "Commercial Bank",
+        "listed_shares": 31357785,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 31357785,
+        "market_cap": 36819003.37,
+        "price": {
+            "open": 826.29,
+            "high": 868.49,
+            "low": 816.68,
+            "close": 866.02
+        },
+        "volume": 339592,
+        "eps": 28.67,
+        "pe_ratio": 22.89,
+        "circuit_status": "None"
+    },
+    "ICFC": {
+        "company_name": "ICFC Finance Ltd.",
+        "sector": "Finance",
+        "listed_shares": 24113873,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 2411387300,
+        "market_cap": 3302871476.02,
+        "price": {
+            "open": 829.12,
+            "high": 859.49,
+            "low": 823.45,
+            "close": 859.33
+        },
+        "volume": 123054,
+        "eps": 53.72,
+        "pe_ratio": 20.58,
+        "circuit_status": "None"
+    },
+    "MZB": {
+        "company_name": "Muktinath Bank Ltd.",
+        "sector": "Commercial Bank",
+        "listed_shares": 44224981,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 44224981,
+        "market_cap": 74979372.79,
+        "price": {
+            "open": 1045.02,
+            "high": 1067.41,
+            "low": 1044.46,
+            "close": 1061.26
+        },
+        "volume": 775232,
+        "eps": 64.87,
+        "pe_ratio": 15.39,
+        "circuit_status": "None"
+    },
+    "CIT": {
+        "company_name": "Citizens Bank International",
+        "sector": "Commercial Bank",
+        "listed_shares": 27801535,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 27801535,
+        "market_cap": 41438441.5,
+        "price": {
+            "open": 710.46,
+            "high": 752.21,
+            "low": 701.35,
+            "close": 750.21
+        },
+        "volume": 496712,
+        "eps": 49.68,
+        "pe_ratio": 15.62,
+        "circuit_status": "Upper"
+    },
+    "SIFC": {
+        "company_name": "Siddhartha Investment Fund",
+        "sector": "Investment Fund",
+        "listed_shares": 24992944,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 249929440,
+        "market_cap": 282467916.57,
+        "price": {
+            "open": 715.67,
+            "high": 770.98,
+            "low": 713.01,
+            "close": 764.29
+        },
+        "volume": 375905,
+        "eps": 76.65,
+        "pe_ratio": 14.71,
+        "circuit_status": "Upper"
+    },
+    "STC": {
+        "company_name": "Salt Trading Corporation",
+        "sector": "Public Corporation",
+        "listed_shares": 11896606,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 118966060,
+        "market_cap": 176141405.22,
+        "price": {
+            "open": 1154.82,
+            "high": 1206.11,
+            "low": 1147.16,
+            "close": 1200.18
+        },
+        "volume": 101181,
+        "eps": 48.03,
+        "pe_ratio": 11.31,
+        "circuit_status": "None"
+    },
+    "NEF": {
+        "company_name": "Nepal Electricity Authority",
+        "sector": "Utility",
+        "listed_shares": 45706831,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 457068310,
+        "market_cap": 717933067.09,
+        "price": {
+            "open": 552.24,
+            "high": 598.73,
+            "low": 542.98,
+            "close": 590.66
+        },
+        "volume": 533836,
+        "eps": 60.86,
+        "pe_ratio": 17.93,
+        "circuit_status": "Upper"
+    },
+    "AIC": {
+        "company_name": "Agriculture Insurance Company Ltd.",
+        "sector": "Non-Life Insurance",
+        "listed_shares": 49821091,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 4982109100,
+        "market_cap": 5494757064.81,
+        "price": {
+            "open": 1074.49,
+            "high": 1130.02,
+            "low": 1067.87,
+            "close": 1123.5
+        },
+        "volume": 355413,
+        "eps": 79.62,
+        "pe_ratio": 11.58,
+        "circuit_status": "None"
+    },
+    "NBB": {
+        "company_name": "Nepal Bangladesh Bank",
+        "sector": "Commercial Bank",
+        "listed_shares": 32932825,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 3293282500,
+        "market_cap": 6560752699.72,
+        "price": {
+            "open": 1013.12,
+            "high": 1039.04,
+            "low": 1005.57,
+            "close": 1036.67
+        },
+        "volume": 708876,
+        "eps": 41.09,
+        "pe_ratio": 16.7,
+        "circuit_status": "None"
+    },
+    "KBL": {
+        "company_name": "Kumari Bank Limited",
+        "sector": "Commercial Bank",
+        "listed_shares": 41913825,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 4191382500,
+        "market_cap": 6898345121.18,
+        "price": {
+            "open": 1185.6,
+            "high": 1211.65,
+            "low": 1180.49,
+            "close": 1206.53
+        },
+        "volume": 306460,
+        "eps": 27.52,
+        "pe_ratio": 11.99,
+        "circuit_status": "None"
+    },
+    "DBBL": {
+        "company_name": "Dev Bikas Bank Ltd.",
+        "sector": "Commercial Bank",
+        "listed_shares": 27718391,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 27718391,
+        "market_cap": 35432421.39,
+        "price": {
+            "open": 859.85,
+            "high": 869.6,
+            "low": 839.34,
+            "close": 842.02
+        },
+        "volume": 140875,
+        "eps": 38.53,
+        "pe_ratio": 15.89,
+        "circuit_status": "None"
+    },
+    "CMB": {
+        "company_name": "Chhimek Bank Limited",
+        "sector": "Commercial Bank",
+        "listed_shares": 27235971,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 2723597100,
+        "market_cap": 4166395068.11,
+        "price": {
+            "open": 1331.42,
+            "high": 1332.0,
+            "low": 1326.13,
+            "close": 1327.31
+        },
+        "volume": 204471,
+        "eps": 55.63,
+        "pe_ratio": 17.66,
+        "circuit_status": "None"
+    },
+    "BSEB": {
+        "company_name": "Bhaktapur Secondary Education Board",
+        "sector": "Education",
+        "listed_shares": 10409030,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 104090300,
+        "market_cap": 195766196.62,
+        "price": {
+            "open": 1398.78,
+            "high": 1443.64,
+            "low": 1392.06,
+            "close": 1442.75
+        },
+        "volume": 948176,
+        "eps": 73.17,
+        "pe_ratio": 22.1,
+        "circuit_status": "None"
+    },
+    "AHL": {
+        "company_name": "Asian Hotels Ltd.",
+        "sector": "Hospitality",
+        "listed_shares": 47008857,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 47008857,
+        "market_cap": 65129888.93,
+        "price": {
+            "open": 1386.19,
+            "high": 1430.17,
+            "low": 1376.67,
+            "close": 1429.6
+        },
+        "volume": 869041,
+        "eps": 77.13,
+        "pe_ratio": 24.59,
+        "circuit_status": "None"
+    },
+    "NIB": {
+        "company_name": "Nepal Investment Bank Ltd.",
+        "sector": "Commercial Bank",
+        "listed_shares": 37935098,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 37935098,
+        "market_cap": 51843106.6,
+        "price": {
+            "open": 532.09,
+            "high": 564.81,
+            "low": 524.04,
+            "close": 554.85
+        },
+        "volume": 532980,
+        "eps": 64.81,
+        "pe_ratio": 19.43,
+        "circuit_status": "None"
+    },
+    "TBI": {
+        "company_name": "Triveni Bikas Bank",
+        "sector": "Commercial Bank",
+        "listed_shares": 45418292,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 454182920,
+        "market_cap": 580216175.51,
+        "price": {
+            "open": 789.28,
+            "high": 798.83,
+            "low": 784.91,
+            "close": 790.95
+        },
+        "volume": 327171,
+        "eps": 60.67,
+        "pe_ratio": 15.43,
+        "circuit_status": "None"
+    },
+    "UBBL": {
+        "company_name": "Uttarganga Bikas Bank",
+        "sector": "Commercial Bank",
+        "listed_shares": 38549736,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 385497360,
+        "market_cap": 489058895.08,
+        "price": {
+            "open": 1256.49,
+            "high": 1260.23,
+            "low": 1240.37,
+            "close": 1240.53
+        },
+        "volume": 52561,
+        "eps": 64.14,
+        "pe_ratio": 12.15,
+        "circuit_status": "None"
+    },
+    "GMFBS": {
+        "company_name": "Gorkha Finance Ltd.",
+        "sector": "Finance",
+        "listed_shares": 30852943,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 30852943,
+        "market_cap": 61061617.17,
+        "price": {
+            "open": 610.37,
+            "high": 657.78,
+            "low": 604.49,
+            "close": 655.99
+        },
+        "volume": 714011,
+        "eps": 22.49,
+        "pe_ratio": 10.74,
+        "circuit_status": "Upper"
+    },
+    "HGF": {
+        "company_name": "Himalaya Gurans Finance",
+        "sector": "Finance",
+        "listed_shares": 13934453,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 139344530,
+        "market_cap": 189569716.81,
+        "price": {
+            "open": 1067.8,
+            "high": 1071.46,
+            "low": 1058.09,
+            "close": 1069.96
+        },
+        "volume": 948352,
+        "eps": 78.36,
+        "pe_ratio": 17.32,
+        "circuit_status": "None"
+    },
+    "SBIBL": {
+        "company_name": "Shree Harsha Investment Bank",
+        "sector": "Investment Bank",
+        "listed_shares": 24200910,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 2420091000,
+        "market_cap": 4480290640.19,
+        "price": {
+            "open": 1481.83,
+            "high": 1488.21,
+            "low": 1457.65,
+            "close": 1466.27
+        },
+        "volume": 941479,
+        "eps": 48.88,
+        "pe_ratio": 23.51,
+        "circuit_status": "None"
+    },
+    "UMFB": {
+        "company_name": "Union Finance Limited",
+        "sector": "Finance",
+        "listed_shares": 38043408,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 380434080,
+        "market_cap": 432245106.42,
+        "price": {
+            "open": 1449.54,
+            "high": 1476.36,
+            "low": 1444.19,
+            "close": 1473.55
+        },
+        "volume": 580569,
+        "eps": 44.67,
+        "pe_ratio": 19.0,
+        "circuit_status": "None"
+    },
+    "NFCL": {
+        "company_name": "Nepal Fertilizer Corporation Ltd.",
+        "sector": "Agriculture",
+        "listed_shares": 45461868,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 454618680,
+        "market_cap": 891972918.55,
+        "price": {
+            "open": 748.05,
+            "high": 784.3,
+            "low": 742.49,
+            "close": 780.93
+        },
+        "volume": 346288,
+        "eps": 77.06,
+        "pe_ratio": 23.77,
+        "circuit_status": "None"
+    },
+    "KMC": {
+        "company_name": "Kathmandu Metropolitan Corporation",
+        "sector": "Government",
+        "listed_shares": 16217239,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 1621723900,
+        "market_cap": 3073066899.98,
+        "price": {
+            "open": 1040.01,
+            "high": 1040.73,
+            "low": 1027.19,
+            "close": 1036.25
+        },
+        "volume": 654424,
+        "eps": 62.61,
+        "pe_ratio": 16.52,
+        "circuit_status": "None"
+    },
+    "BBL": {
+        "company_name": "Bihar Bank Limited",
+        "sector": "Commercial Bank",
+        "listed_shares": 35133685,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 3513368500,
+        "market_cap": 6236561367.82,
+        "price": {
+            "open": 715.93,
+            "high": 737.93,
+            "low": 715.43,
+            "close": 733.84
+        },
+        "volume": 565673,
+        "eps": 58.1,
+        "pe_ratio": 23.63,
+        "circuit_status": "None"
+    },
+    "IVL": {
+        "company_name": "Indo Nepal Venture Ltd.",
+        "sector": "Venture Capital",
+        "listed_shares": 32109680,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 321096800,
+        "market_cap": 412897841.36,
+        "price": {
+            "open": 617.04,
+            "high": 643.73,
+            "low": 610.99,
+            "close": 639.02
+        },
+        "volume": 139277,
+        "eps": 28.01,
+        "pe_ratio": 21.97,
+        "circuit_status": "None"
+    },
+    "GBC": {
+        "company_name": "Global Bank Nepal",
+        "sector": "Commercial Bank",
+        "listed_shares": 43866555,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 4386655500,
+        "market_cap": 4516386171.77,
+        "price": {
+            "open": 546.19,
+            "high": 568.43,
+            "low": 540.32,
+            "close": 561.12
+        },
+        "volume": 367147,
+        "eps": 77.87,
+        "pe_ratio": 17.99,
+        "circuit_status": "None"
+    },
+    "PRDS": {
+        "company_name": "Pradesh Bank",
+        "sector": "Commercial Bank",
+        "listed_shares": 19129825,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 1912982500,
+        "market_cap": 3527154395.24,
+        "price": {
+            "open": 722.26,
+            "high": 741.46,
+            "low": 721.01,
+            "close": 735.09
+        },
+        "volume": 502782,
+        "eps": 41.93,
+        "pe_ratio": 24.05,
+        "circuit_status": "None"
+    },
+    "EBL": {
+        "company_name": "Everest Bank Ltd.",
+        "sector": "Commercial Bank",
+        "listed_shares": 11593790,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 115937900,
+        "market_cap": 218407112.69,
+        "price": {
+            "open": 1415.5,
+            "high": 1426.3,
+            "low": 1407.32,
+            "close": 1425.09
+        },
+        "volume": 185072,
+        "eps": 77.62,
+        "pe_ratio": 18.06,
+        "circuit_status": "None"
+    },
+    "EICL": {
+        "company_name": "Everest Industrial Company Limited",
+        "sector": "Manufacturing",
+        "listed_shares": 13049734,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 13049734,
+        "market_cap": 19043882.31,
+        "price": {
+            "open": 565.38,
+            "high": 575.94,
+            "low": 558.14,
+            "close": 571.42
+        },
+        "volume": 909331,
+        "eps": 21.74,
+        "pe_ratio": 13.6,
+        "circuit_status": "None"
+    },
+    "GNH": {
+        "company_name": "Great Nepal Holdings",
+        "sector": "Conglomerate",
+        "listed_shares": 11898076,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 118980760,
+        "market_cap": 199102059.52,
+        "price": {
+            "open": 1334.39,
+            "high": 1349.49,
+            "low": 1334.28,
+            "close": 1344.47
+        },
+        "volume": 646466,
+        "eps": 25.65,
+        "pe_ratio": 12.46,
+        "circuit_status": "None"
+    },
+    "SKC": {
+        "company_name": "Shree Kanchan Construction Ltd.",
+        "sector": "Construction",
+        "listed_shares": 13276346,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 1327634600,
+        "market_cap": 1680100706.24,
+        "price": {
+            "open": 961.12,
+            "high": 1007.37,
+            "low": 951.24,
+            "close": 1000.42
+        },
+        "volume": 561101,
+        "eps": 61.14,
+        "pe_ratio": 18.65,
+        "circuit_status": "None"
+    },
+    "AAI": {
+        "company_name": "Agriculture and Allied Industries Ltd.",
+        "sector": "Agriculture",
+        "listed_shares": 37120424,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 37120424,
+        "market_cap": 48073634.5,
+        "price": {
+            "open": 1345.99,
+            "high": 1378.74,
+            "low": 1344.18,
+            "close": 1368.92
+        },
+        "volume": 984506,
+        "eps": 44.81,
+        "pe_ratio": 20.02,
+        "circuit_status": "None"
+    },
+    "BBC": {
+        "company_name": "Buddha Brokers Company",
+        "sector": "Brokerage",
+        "listed_shares": 43853315,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 4385331500,
+        "market_cap": 4994626870.17,
+        "price": {
+            "open": 781.95,
+            "high": 802.03,
+            "low": 776.31,
+            "close": 794.12
+        },
+        "volume": 537898,
+        "eps": 25.42,
+        "pe_ratio": 12.26,
+        "circuit_status": "None"
+    },
+    "MG": {
+        "company_name": "Manang Finance",
+        "sector": "Finance",
+        "listed_shares": 17534784,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 17534784,
+        "market_cap": 34576601.32,
+        "price": {
+            "open": 1198.57,
+            "high": 1244.44,
+            "low": 1195.28,
+            "close": 1234.8
+        },
+        "volume": 499036,
+        "eps": 50.11,
+        "pe_ratio": 23.55,
+        "circuit_status": "None"
+    },
+    "MBL": {
+        "company_name": "Machhapuchhre Bank Limited",
+        "sector": "Commercial Bank",
+        "listed_shares": 13425847,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 13425847,
+        "market_cap": 20871035.12,
+        "price": {
+            "open": 1325.63,
+            "high": 1333.0,
+            "low": 1308.09,
+            "close": 1309.56
+        },
+        "volume": 981134,
+        "eps": 58.9,
+        "pe_ratio": 22.12,
+        "circuit_status": "None"
+    },
+    "ICL": {
+        "company_name": "International Capital Ltd.",
+        "sector": "Capital Market",
+        "listed_shares": 37508874,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 3750887400,
+        "market_cap": 3755898811.91,
+        "price": {
+            "open": 1212.87,
+            "high": 1246.96,
+            "low": 1205.95,
+            "close": 1246.86
+        },
+        "volume": 331483,
+        "eps": 70.01,
+        "pe_ratio": 19.54,
+        "circuit_status": "None"
+    },
+    "ASPSL": {
+        "company_name": "Asian Securities Pvt. Ltd.",
+        "sector": "Investment Firm",
+        "listed_shares": 27978423,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 27978423,
+        "market_cap": 31536752.23,
+        "price": {
+            "open": 1324.19,
+            "high": 1365.93,
+            "low": 1323.51,
+            "close": 1365.15
+        },
+        "volume": 905190,
+        "eps": 47.62,
+        "pe_ratio": 14.38,
+        "circuit_status": "None"
+    },
+    "RIT": {
+        "company_name": "Royal Investment Trust",
+        "sector": "Investment Fund",
+        "listed_shares": 29594363,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 295943630,
+        "market_cap": 530015794.33,
+        "price": {
+            "open": 1393.44,
+            "high": 1441.97,
+            "low": 1388.45,
+            "close": 1437.63
+        },
+        "volume": 805171,
+        "eps": 69.19,
+        "pe_ratio": 11.21,
+        "circuit_status": "None"
+    },
+    "PFC": {
+        "company_name": "Pokhara Finance Company",
+        "sector": "Finance",
+        "listed_shares": 13214849,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 13214849,
+        "market_cap": 21916982.11,
+        "price": {
+            "open": 514.56,
+            "high": 537.03,
+            "low": 512.15,
+            "close": 534.72
+        },
+        "volume": 639050,
+        "eps": 44.21,
+        "pe_ratio": 22.36,
+        "circuit_status": "None"
+    },
+    "NTC": {
+        "company_name": "Nepal Telecom",
+        "sector": "Telecommunications",
+        "listed_shares": 20689675,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 2068967500,
+        "market_cap": 3328618075.25,
+        "price": {
+            "open": 1216.73,
+            "high": 1220.22,
+            "low": 1198.42,
+            "close": 1204.33
+        },
+        "volume": 975179,
+        "eps": 25.66,
+        "pe_ratio": 10.03,
+        "circuit_status": "None"
+    },
+    "BHL": {
+        "company_name": "Buddha Air Ltd.",
+        "sector": "Aviation",
+        "listed_shares": 17980186,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 17980186,
+        "market_cap": 23512008.13,
+        "price": {
+            "open": 878.78,
+            "high": 886.74,
+            "low": 861.0,
+            "close": 864.19
+        },
+        "volume": 116654,
+        "eps": 39.45,
+        "pe_ratio": 20.13,
+        "circuit_status": "None"
+    },
+    "YET": {
+        "company_name": "Yeti Airlines",
+        "sector": "Aviation",
+        "listed_shares": 45242774,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 452427740,
+        "market_cap": 754374051.96,
+        "price": {
+            "open": 994.77,
+            "high": 1022.45,
+            "low": 993.83,
+            "close": 1019.36
+        },
+        "volume": 903508,
+        "eps": 66.25,
+        "pe_ratio": 19.95,
+        "circuit_status": "None"
+    },
+    "DHL": {
+        "company_name": "Dhaulagiri Hotel Limited",
+        "sector": "Hospitality",
+        "listed_shares": 40651751,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 4065175100,
+        "market_cap": 5091494160.25,
+        "price": {
+            "open": 1059.05,
+            "high": 1076.45,
+            "low": 1055.49,
+            "close": 1069.78
+        },
+        "volume": 641798,
+        "eps": 43.01,
+        "pe_ratio": 20.3,
+        "circuit_status": "None"
+    },
+    "GTL": {
+        "company_name": "Global Trading Ltd.",
+        "sector": "Trading",
+        "listed_shares": 20097132,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 2009713200,
+        "market_cap": 2614975276.94,
+        "price": {
+            "open": 968.9,
+            "high": 999.87,
+            "low": 964.11,
+            "close": 997.82
+        },
+        "volume": 410181,
+        "eps": 42.7,
+        "pe_ratio": 20.27,
+        "circuit_status": "None"
+    },
+    "GEM": {
+        "company_name": "Gemini Enterprises Ltd.",
+        "sector": "Retail",
+        "listed_shares": 23546530,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 235465300,
+        "market_cap": 239991106.36,
+        "price": {
+            "open": 1207.23,
+            "high": 1236.62,
+            "low": 1203.13,
+            "close": 1233.01
+        },
+        "volume": 165646,
+        "eps": 59.68,
+        "pe_ratio": 10.05,
+        "circuit_status": "None"
+    },
+    "CFL": {
+        "company_name": "Capital Finance Ltd.",
+        "sector": "Finance",
+        "listed_shares": 34881423,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 34881423,
+        "market_cap": 61821954.09,
+        "price": {
+            "open": 1234.03,
+            "high": 1258.06,
+            "low": 1232.77,
+            "close": 1255.67
+        },
+        "volume": 838164,
+        "eps": 22.6,
+        "pe_ratio": 23.32,
+        "circuit_status": "None"
+    },
+    "PBL": {
+        "company_name": "Pokhara Bank Ltd.",
+        "sector": "Commercial Bank",
+        "listed_shares": 19950024,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 1995002400,
+        "market_cap": 3885734362.92,
+        "price": {
+            "open": 544.78,
+            "high": 551.53,
+            "low": 540.46,
+            "close": 542.95
+        },
+        "volume": 124865,
+        "eps": 31.52,
+        "pe_ratio": 14.56,
+        "circuit_status": "None"
+    },
+    "LTL": {
+        "company_name": "Laxmi Trust Ltd.",
+        "sector": "Investment Trust",
+        "listed_shares": 14219142,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 1421914200,
+        "market_cap": 2213546388.81,
+        "price": {
+            "open": 1138.82,
+            "high": 1150.29,
+            "low": 1131.46,
+            "close": 1142.84
+        },
+        "volume": 788135,
+        "eps": 76.32,
+        "pe_ratio": 16.23,
+        "circuit_status": "None"
+    },
+    "BSBL": {
+        "company_name": "Buddha Securities",
+        "sector": "Securities",
+        "listed_shares": 36025890,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 36025890,
+        "market_cap": 52770910.68,
+        "price": {
+            "open": 1177.37,
+            "high": 1220.13,
+            "low": 1167.45,
+            "close": 1216.93
+        },
+        "volume": 152220,
+        "eps": 43.4,
+        "pe_ratio": 19.64,
+        "circuit_status": "None"
+    },
+    "ANBL": {
+        "company_name": "Annapurna Bank Limited",
+        "sector": "Commercial Bank",
+        "listed_shares": 14703716,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 1470371600,
+        "market_cap": 2807640398.26,
+        "price": {
+            "open": 907.13,
+            "high": 933.0,
+            "low": 901.92,
+            "close": 928.44
+        },
+        "volume": 514593,
+        "eps": 35.6,
+        "pe_ratio": 22.48,
+        "circuit_status": "None"
+    },
+    "FLB": {
+        "company_name": "First Loan Bank Ltd.",
+        "sector": "Loan Financing",
+        "listed_shares": 44029771,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 4402977100,
+        "market_cap": 8368753035.55,
+        "price": {
+            "open": 634.65,
+            "high": 637.29,
+            "low": 620.02,
+            "close": 620.88
+        },
+        "volume": 55196,
+        "eps": 26.32,
+        "pe_ratio": 17.6,
+        "circuit_status": "None"
+    },
+    "CFC": {
+        "company_name": "Citizens Finance Co. Ltd.",
+        "sector": "Finance",
+        "listed_shares": 10217665,
+        "paid_up_value": 100,
+        "total_paid_up_capital": 1021766500,
+        "market_cap": 1454550357.24,
+        "price": {
+            "open": 647.31,
+            "high": 653.04,
+            "low": 645.38,
+            "close": 651.95
+        },
+        "volume": 294298,
+        "eps": 61.66,
+        "pe_ratio": 11.93,
+        "circuit_status": "None"
+    },
+    "SLBL": {
+        "company_name": "Siddhartha Loan Bank Ltd.",
+        "sector": "Finance",
+        "listed_shares": 34938904,
+        "paid_up_value": 1,
+        "total_paid_up_capital": 34938904,
+        "market_cap": 58155059.58,
+        "price": {
+            "open": 977.1,
+            "high": 988.71,
+            "low": 972.0,
+            "close": 986.1
+        },
+        "volume": 926555,
+        "eps": 70.95,
+        "pe_ratio": 11.8,
+        "circuit_status": "None"
+    },
+    "RCL": {
+        "company_name": "Rambhadevi Construction Ltd.",
+        "sector": "Construction",
+        "listed_shares": 19069310,
+        "paid_up_value": 10,
+        "total_paid_up_capital": 190693100,
+        "market_cap": 277532913.58,
+        "price": {
+            "open": 976.68,
+            "high": 1006.95,
+            "low": 972.52,
+            "close": 1006.14
+        },
+        "volume": 459867,
+        "eps": 39.78,
+        "pe_ratio": 10.8,
+        "circuit_status": "None"
+    }
+}

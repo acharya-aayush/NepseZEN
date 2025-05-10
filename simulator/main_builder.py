@@ -1,0 +1,1046 @@
+"""
+NEPSEZEN - Nepal Stock Exchange Simulator
+Main Simulation Builder Module
+
+This module serves as the main engine for running the stock market simulation,
+coordinating data generation, market events, and analytics.
+"""
+
+import os
+import sys
+import logging
+import json
+import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta
+import time
+import random
+import threading
+
+# Add parent directory to path for imports
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import config
+from simulator.data_gen import DataGenerator, RealTimeSimulator
+from analytics.analyzer import MarketAnalyzer
+from utils.indicators import calculate_rsi, calculate_macd
+
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+
+class MarketSimulation:
+    """
+    Main class for coordinating the entire stock market simulation.
+    """
+    
+    def __init__(self):
+        """
+        Initialize the market simulation with all required components.
+        """
+        self.company_info = {}
+        self.data_generator = None
+        self.realtime_simulator = None
+        self.market_analyzer = None
+        self.is_running = False
+        self.simulation_thread = None
+        self.callbacks = {}
+        self.portfolio_manager = None
+        
+        # Simulation state
+        self.mode = "historical"  # 'historical' or 'realtime'
+        
+        logger.info("NEPSEZEN Market Simulation initialized")
+    
+    def load_company_data(self, file_path=None):
+        """
+        Load company data from a JSON file.
+        
+        Args:
+            file_path (str, optional): Path to the JSON file, defaults to config value
+            
+        Returns:
+            bool: True if loading successful, False otherwise
+        """
+        if file_path is None:
+            file_path = config.COMPANIES_DATA_FILE
+        
+        try:
+            with open(file_path, 'r') as f:
+                self.company_info = json.load(f)
+            
+            # Initialize components with company data
+            self.data_generator = DataGenerator(self.company_info)
+            self.realtime_simulator = RealTimeSimulator(company_info=self.company_info)
+            self.market_analyzer = MarketAnalyzer(company_info=self.company_info)
+            
+            logger.info(f"Loaded data for {len(self.company_info)} companies from {file_path}")
+            return True
+        except Exception as e:
+            logger.error(f"Error loading company data: {str(e)}")
+            return False
+    
+    def initialize_simulation(self, start_date=None, initial_sentiment=None, historical_days=365):
+        """
+        Initialize the market simulation with parameters.
+        
+        Args:
+            start_date (str, optional): Start date for the simulation, defaults to 1 year ago
+            initial_sentiment (float, optional): Initial market sentiment (-1.0 to 1.0)
+            historical_days (int, optional): Number of historical days to generate, defaults to 365
+            
+        Returns:
+            bool: True if initialization successful, False otherwise
+        """
+        if not self.data_generator:
+            logger.error("Data generator not initialized. Load company data first.")
+            return False
+        
+        try:
+            # Initialize market factors
+            self.data_generator.initialize_market_factors(initial_sentiment, start_date)
+            
+            # Generate historical data
+            self.data_generator.generate_historical_data(historical_days)
+            
+            # Share data with other components
+            if self.data_generator.stock_data is not None:
+                self.market_analyzer.load_data(self.data_generator.stock_data, self.company_info)
+                self.realtime_simulator.stock_data = self.data_generator.stock_data
+                
+                # Set current date for realtime simulator
+                latest_date = self.data_generator.stock_data.index.get_level_values(0).max()
+                next_date = latest_date + timedelta(days=1)
+                while next_date.weekday() >= 5:  # Skip weekends
+                    next_date += timedelta(days=1)
+                self.realtime_simulator.set_current_date(next_date)
+                
+                logger.info(f"Market simulation initialized with {historical_days} days of historical data")
+                return True
+            else:
+                logger.error("Failed to generate historical data")
+                return False
+        except Exception as e:
+            logger.error(f"Error initializing simulation: {str(e)}")
+            return False
+    
+    def load_historical_data(self, file_path, update_company_info=True):
+        """
+        Load historical data from an HDF5 file instead of generating it.
+        
+        Args:
+            file_path (str): Path to the HDF5 file
+            update_company_info (bool, optional): Whether to update company info with latest data
+            
+        Returns:
+            bool: True if loading successful, False otherwise
+        """
+        if not self.data_generator:
+            logger.error("Data generator not initialized. Load company data first.")
+            return False
+        
+        try:
+            # Load historical data
+            success = self.data_generator.load_historical_data(file_path)
+            
+            if success and self.data_generator.stock_data is not None:
+                # Share data with other components
+                self.market_analyzer.load_data(self.data_generator.stock_data, self.company_info)
+                self.realtime_simulator.stock_data = self.data_generator.stock_data
+                
+                # Set current date for realtime simulator
+                latest_date = self.data_generator.stock_data.index.get_level_values(0).max()
+                next_date = latest_date + timedelta(days=1)
+                while next_date.weekday() >= 5:  # Skip weekends
+                    next_date += timedelta(days=1)
+                self.realtime_simulator.set_current_date(next_date)
+                
+                # Update company info with latest data
+                if update_company_info:
+                    latest_data = self.data_generator.get_latest_company_data()
+                    for symbol, data in latest_data.items():
+                        if symbol in self.company_info:
+                            self.company_info[symbol]['price'] = {
+                                'open': data['open'],
+                                'high': data['high'],
+                                'low': data['low'],
+                                'close': data['close']
+                            }
+                            self.company_info[symbol]['volume'] = data['volume']
+                
+                logger.info(f"Loaded historical data from {file_path}")
+                return True
+            else:
+                logger.error("Failed to load historical data")
+                return False
+        except Exception as e:
+            logger.error(f"Error loading historical data: {str(e)}")
+            return False
+    
+    def save_historical_data(self, file_path=None):
+        """
+        Save historical data to an HDF5 file.
+        
+        Args:
+            file_path (str, optional): Path to save the HDF5 file
+            
+        Returns:
+            bool: True if saving successful, False otherwise
+        """
+        if not self.data_generator or self.data_generator.stock_data is None:
+            logger.error("No historical data available to save")
+            return False
+        
+        if file_path is None:
+            # Create a file path based on the date range
+            start_date = self.data_generator.stock_data.index.get_level_values(0).min().strftime('%Y%m%d')
+            end_date = self.data_generator.stock_data.index.get_level_values(0).max().strftime('%Y%m%d')
+            file_path = os.path.join(config.HISTORICAL_DATA_DIR, f"nepse_{start_date}_{end_date}.h5")
+        
+        # Ensure directory exists
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        
+        return self.data_generator.save_historical_data(file_path)
+    
+    def save_company_info(self, file_path=None):
+        """
+        Save company information to a JSON file.
+        
+        Args:
+            file_path (str, optional): Path to save the JSON file
+            
+        Returns:
+            bool: True if saving successful, False otherwise
+        """
+        if not self.company_info:
+            logger.error("No company information available to save")
+            return False
+        
+        if file_path is None:
+            # Create a backup of the original file
+            current_date = datetime.now().strftime('%Y%m%d')
+            file_path = os.path.join(os.path.dirname(config.COMPANIES_DATA_FILE), 
+                                     f"companies_{current_date}.json")
+        
+        try:
+            with open(file_path, 'w') as f:
+                json.dump(self.company_info, f, indent=4)
+            logger.info(f"Company information saved to {file_path}")
+            return True
+        except Exception as e:
+            logger.error(f"Error saving company information: {str(e)}")
+            return False
+    
+    def run_historical_simulation(self, days=30, save_data=True):
+        """
+        Run a historical simulation for the specified number of days.
+        
+        Args:
+            days (int, optional): Number of trading days to simulate, defaults to 30
+            save_data (bool, optional): Whether to save the generated data
+            
+        Returns:
+            pd.DataFrame: DataFrame with the generated data
+        """
+        if not self.data_generator:
+            logger.error("Data generator not initialized. Load company data first.")
+            return None
+        
+        try:
+            # Generate data for the specified days
+            new_data = self.data_generator.generate_multiple_days(days)
+            
+            if new_data is not None:
+                # Update market analyzer
+                self.market_analyzer.load_data(self.data_generator.stock_data, self.company_info)
+                
+                # Save data if requested
+                if save_data:
+                    self.save_historical_data()
+                    self.save_company_info()
+                
+                logger.info(f"Historical simulation completed for {days} trading days")
+                return new_data
+            else:
+                logger.error("Failed to generate simulation data")
+                return None
+        except Exception as e:
+            logger.error(f"Error running historical simulation: {str(e)}")
+            return None
+    
+    def start_realtime_simulation(self, interval_seconds=5, volatility_factor=1.0):
+        """
+        Start real-time market simulation with periodic updates.
+        
+        Args:
+            interval_seconds (int, optional): Interval between updates in seconds, defaults to 5
+            volatility_factor (float, optional): Factor to adjust price volatility, defaults to 1.0
+            
+        Returns:
+            bool: True if simulation started successfully, False otherwise
+        """
+        if self.is_running:
+            logger.warning("Real-time simulation already running")
+            return False
+        
+        if not self.realtime_simulator:
+            logger.error("Real-time simulator not initialized. Load company data first.")
+            return False
+        
+        try:
+            # Set mode to realtime
+            self.mode = "realtime"
+            
+            # Start the simulation in a separate thread
+            def simulation_loop():
+                # Open the market
+                self.realtime_simulator.open_market()
+                self._notify_callbacks('market_open', self.realtime_simulator.get_market_status())
+                
+                # Main simulation loop
+                while self.is_running and self.realtime_simulator.market_open:
+                    # Calculate minutes elapsed based on interval
+                    minutes_elapsed = max(1, int(interval_seconds / 60))
+                    
+                    # Update prices
+                    update_data = self.realtime_simulator.update_prices(
+                        minutes_elapsed=minutes_elapsed,
+                        volatility_factor=volatility_factor
+                    )
+                    
+                    # Notify callbacks of the update
+                    self._notify_callbacks('price_update', update_data)
+                    
+                    # Check if market should be closed
+                    if not self.realtime_simulator.market_open:
+                        final_data = self.realtime_simulator.get_market_status()
+                        self._notify_callbacks('market_close', final_data)
+                        break
+                    
+                    # Wait for the next update
+                    time.sleep(interval_seconds)
+                
+                self.is_running = False
+            
+            # Start simulation thread
+            self.is_running = True
+            self.simulation_thread = threading.Thread(target=simulation_loop)
+            self.simulation_thread.daemon = True
+            self.simulation_thread.start()
+            
+            logger.info(f"Real-time simulation started with {interval_seconds}s update interval")
+            return True
+        except Exception as e:
+            logger.error(f"Error starting real-time simulation: {str(e)}")
+            self.is_running = False
+            return False
+    
+    def stop_realtime_simulation(self):
+        """
+        Stop the running real-time simulation.
+        
+        Returns:
+            bool: True if simulation stopped successfully, False otherwise
+        """
+        if not self.is_running:
+            logger.warning("Real-time simulation is not running")
+            return False
+        
+        try:
+            # Signal the loop to stop
+            self.is_running = False
+            
+            # Wait for the thread to finish
+            if self.simulation_thread and self.simulation_thread.is_alive():
+                self.simulation_thread.join(timeout=10)
+            
+            # Close the market if it's still open
+            if self.realtime_simulator and self.realtime_simulator.market_open:
+                final_data = self.realtime_simulator.close_market()
+                self._notify_callbacks('market_close', self.realtime_simulator.get_market_status())
+            
+            logger.info("Real-time simulation stopped")
+            return True
+        except Exception as e:
+            logger.error(f"Error stopping real-time simulation: {str(e)}")
+            return False
+    
+    def register_callback(self, event_type, callback):
+        """
+        Register a callback function for simulation events.
+        
+        Args:
+            event_type (str): Type of event ('price_update', 'market_open', 'market_close', etc.)
+            callback (function): Callback function to register
+        """
+        if event_type not in self.callbacks:
+            self.callbacks[event_type] = []
+        
+        self.callbacks[event_type].append(callback)
+        logger.debug(f"Registered callback for event type: {event_type}")
+    
+    def _notify_callbacks(self, event_type, data):
+        """
+        Notify all registered callbacks for a given event type.
+        
+        Args:
+            event_type (str): Type of event
+            data: Data to pass to the callback functions
+        """
+        if event_type in self.callbacks:
+            for callback in self.callbacks[event_type]:
+                try:
+                    callback(data)
+                except Exception as e:
+                        logger.error(f"Error in {event_type} callback: {str(e)}")
+    
+        def run_market_analysis(self, start_date=None, end_date=None):
+            """
+            Run comprehensive market analysis.
+            
+            Args:
+                start_date (str, optional): Start date for analysis, defaults to earliest date
+                end_date (str, optional): End date for analysis, defaults to latest date
+            
+        Returns:
+            dict: Dictionary with analysis results
+        """
+        if not hasattr(self, 'data_generator') or self.data_generator.stock_data is None:
+            logger.error("No stock data available for analysis")
+            return None
+        
+        # Import the simple analysis function for dashboard
+        try:
+            from dashboard.simple_analyze import simple_market_analysis
+            return simple_market_analysis(self.data_generator.stock_data, self.company_info)
+        except ImportError:
+            logger.error("Could not import simple_analyze module")
+            
+            # Fallback to basic analysis
+            results = {}
+            results['top_gainers'] = {}
+            results['top_losers'] = {}
+            results['volume_leaders'] = {}
+            results['market_breadth'] = {
+                'advances': 0,
+                'declines': 0,
+                'unchanged': 0,
+                'total': 0,
+                'advance_decline_ratio': 1.0
+            }
+            return results
+    
+    def get_stock_data(self, symbol=None, start_date=None, end_date=None):
+        """
+        Get historical stock data for a symbol or all symbols.
+        
+        Args:
+            symbol (str, optional): Company symbol, defaults to None (all companies)
+            start_date (str, optional): Start date for data, defaults to earliest date
+            end_date (str, optional): End date for data, defaults to latest date
+            
+        Returns:
+            pd.DataFrame: DataFrame with requested stock data
+        """
+        if not self.data_generator or self.data_generator.stock_data is None:
+            logger.error("No stock data available")
+            return None
+        
+        try:
+            # Get all data
+            data = self.data_generator.stock_data
+            
+            # Filter by date if specified
+            if start_date is not None or end_date is not None:
+                idx = pd.IndexSlice
+                if start_date is None:
+                    start_date = data.index.get_level_values(0).min()
+                if end_date is None:
+                    end_date = data.index.get_level_values(0).max()
+                
+                data = data.loc[idx[start_date:end_date, :], :]
+            
+            # Filter by symbol if specified
+            if symbol is not None:
+                data = data.xs(symbol, level=1)
+            
+            return data
+        except Exception as e:
+            logger.error(f"Error getting stock data: {str(e)}")
+            return None
+    
+    def get_market_status(self):
+        """
+        Get the current market status.
+        
+        Returns:
+            dict: Dictionary with market status information
+        """
+        if self.mode == "realtime" and self.realtime_simulator:
+            return self.realtime_simulator.get_market_status()
+        else:
+            # For historical mode, provide basic information
+            if self.data_generator and self.data_generator.stock_data is not None:
+                latest_date = self.data_generator.stock_data.index.get_level_values(0).max()
+                return {
+                    'mode': 'historical',
+                    'latest_date': latest_date.strftime('%Y-%m-%d'),
+                    'companies': len(self.company_info) if self.company_info else 0,
+                    'trading_days': len(self.data_generator.stock_data.index.get_level_values(0).unique())
+                }
+            else:
+                return {
+                    'mode': 'historical',
+                    'status': 'No data available'
+                }
+    
+    def get_company_list(self, with_details=False):
+        """
+        Get a list of all companies in the simulation.
+        
+        Args:
+            with_details (bool, optional): Whether to include company details, defaults to False
+            
+        Returns:
+            list or dict: List of company symbols or dictionary with details
+        """
+        if not self.company_info:
+            return []
+        
+        if with_details:
+            return {symbol: {
+                'name': info.get('company_name', 'Unknown'),
+                'sector': info.get('sector', 'Unknown'),
+                'latest_price': info.get('price', {}).get('close', None),
+                'market_cap': info.get('market_cap', None),
+                'pe_ratio': info.get('pe_ratio', None),
+                'eps': info.get('eps', None)
+            } for symbol, info in self.company_info.items()}
+        else:
+            return list(self.company_info.keys())
+    
+    def get_sector_list(self):
+        """
+        Get a list of all sectors in the simulation.
+        
+        Returns:
+            dict: Dictionary mapping sectors to company counts
+        """
+        if not self.company_info:
+            return {}
+        
+        sectors = {}
+        for symbol, info in self.company_info.items():
+            sector = info.get('sector', 'Unknown')
+            if sector in sectors:
+                sectors[sector] += 1
+            else:
+                sectors[sector] = 1
+        
+        return sectors
+
+
+class PortfolioManager:
+    """
+    Class for managing simulated investment portfolios.
+    """
+    
+    def __init__(self, simulation):
+        """
+        Initialize the portfolio manager with a reference to the simulation.
+        
+        Args:
+            simulation (MarketSimulation): Reference to the market simulation
+        """
+        self.simulation = simulation
+        self.portfolios = {}
+        
+        logger.info("PortfolioManager initialized")
+    
+    def create_portfolio(self, name, initial_balance=None):
+        """
+        Create a new portfolio with initial cash balance.
+        
+        Args:
+            name (str): Portfolio name
+            initial_balance (float, optional): Initial cash balance, defaults to config value
+            
+        Returns:
+            dict: The newly created portfolio
+        """
+        if name in self.portfolios:
+            logger.warning(f"Portfolio '{name}' already exists")
+            return self.portfolios[name]
+        
+        if initial_balance is None:
+            initial_balance = config.INITIAL_PORTFOLIO_BALANCE
+        
+        portfolio = {
+            'name': name,
+            'cash': initial_balance,
+            'holdings': {},
+            'history': [],
+            'transactions': [],
+            'created_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        }
+        
+        self.portfolios[name] = portfolio
+        logger.info(f"Portfolio '{name}' created with {initial_balance} initial balance")
+        
+        return portfolio
+    
+    def buy_stock(self, portfolio_name, symbol, quantity, price=None, date=None):
+        """
+        Buy a stock for a portfolio.
+        
+        Args:
+            portfolio_name (str): Portfolio name
+            symbol (str): Company symbol
+            quantity (int): Number of shares to buy
+            price (float, optional): Price per share, defaults to latest price
+            date (str, optional): Transaction date, defaults to current date
+            
+        Returns:
+            dict: Transaction details or None if failed
+        """
+        if portfolio_name not in self.portfolios:
+            logger.error(f"Portfolio '{portfolio_name}' does not exist")
+            return None
+        
+        portfolio = self.portfolios[portfolio_name]
+        
+        # If price not provided, get latest price
+        if price is None:
+            if self.simulation.mode == "realtime" and self.simulation.realtime_simulator:
+                # Get price from realtime simulator
+                intraday_data = self.simulation.realtime_simulator.get_intraday_data(symbol)
+                if symbol in intraday_data:
+                    price = intraday_data[symbol]['last']
+                else:
+                    logger.error(f"No realtime price available for {symbol}")
+                    return None
+            else:
+                # Get latest price from historical data
+                company_info = self.simulation.company_info.get(symbol)
+                if company_info and 'price' in company_info:
+                    price = company_info['price'].get('close')
+                else:
+                    logger.error(f"No price information available for {symbol}")
+                    return None
+        
+        # Calculate total cost including transaction fee
+        total_cost = price * quantity
+        fee = total_cost * config.TRANSACTION_FEE_PERCENTAGE
+        total_with_fee = total_cost + fee
+        
+        # Check if enough cash
+        if portfolio['cash'] < total_with_fee:
+            logger.warning(f"Insufficient funds in portfolio '{portfolio_name}' for this transaction")
+            return None
+        
+        # Execute the transaction
+        if date is None:
+            if self.simulation.mode == "realtime" and self.simulation.realtime_simulator:
+                date = self.simulation.realtime_simulator.current_date.strftime('%Y-%m-%d')
+            else:
+                date = datetime.now().strftime('%Y-%m-%d')
+        
+        transaction = {
+            'type': 'buy',
+            'symbol': symbol,
+            'quantity': quantity,
+            'price': price,
+            'fee': fee,
+            'total': total_with_fee,
+            'date': date,
+            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        }
+        
+        # Update portfolio
+        portfolio['cash'] -= total_with_fee
+        if symbol in portfolio['holdings']:
+            # Update existing holding
+            holding = portfolio['holdings'][symbol]
+            new_total_shares = holding['shares'] + quantity
+            new_total_cost = holding['total_cost'] + total_cost
+            holding['shares'] = new_total_shares
+            holding['total_cost'] = new_total_cost
+            holding['average_price'] = new_total_cost / new_total_shares
+        else:
+            # Create new holding
+            portfolio['holdings'][symbol] = {
+                'symbol': symbol,
+                'shares': quantity,
+                'average_price': price,
+                'total_cost': total_cost
+            }
+        
+        # Add transaction to history
+        portfolio['transactions'].append(transaction)
+        
+        # Update portfolio history
+        self.update_portfolio_value(portfolio_name)
+        
+        logger.info(f"Bought {quantity} shares of {symbol} for portfolio '{portfolio_name}'")
+        return transaction
+    
+    def sell_stock(self, portfolio_name, symbol, quantity, price=None, date=None):
+        """
+        Sell a stock from a portfolio.
+        
+        Args:
+            portfolio_name (str): Portfolio name
+            symbol (str): Company symbol
+            quantity (int): Number of shares to sell
+            price (float, optional): Price per share, defaults to latest price
+            date (str, optional): Transaction date, defaults to current date
+            
+        Returns:
+            dict: Transaction details or None if failed
+        """
+        if portfolio_name not in self.portfolios:
+            logger.error(f"Portfolio '{portfolio_name}' does not exist")
+            return None
+        
+        portfolio = self.portfolios[portfolio_name]
+        
+        # Check if holding exists
+        if symbol not in portfolio['holdings']:
+            logger.warning(f"Portfolio '{portfolio_name}' does not hold {symbol}")
+            return None
+        
+        # Check if enough shares
+        holding = portfolio['holdings'][symbol]
+        if holding['shares'] < quantity:
+            logger.warning(f"Portfolio '{portfolio_name}' does not have enough shares of {symbol}")
+            return None
+        
+        # If price not provided, get latest price
+        if price is None:
+            if self.simulation.mode == "realtime" and self.simulation.realtime_simulator:
+                # Get price from realtime simulator
+                intraday_data = self.simulation.realtime_simulator.get_intraday_data(symbol)
+                if symbol in intraday_data:
+                    price = intraday_data[symbol]['last']
+                else:
+                    logger.error(f"No realtime price available for {symbol}")
+                    return None
+            else:
+                # Get latest price from historical data
+                company_info = self.simulation.company_info.get(symbol)
+                if company_info and 'price' in company_info:
+                    price = company_info['price'].get('close')
+                else:
+                    logger.error(f"No price information available for {symbol}")
+                    return None
+        
+        # Calculate sale proceeds after fee
+        sale_value = price * quantity
+        fee = sale_value * config.TRANSACTION_FEE_PERCENTAGE
+        net_proceeds = sale_value - fee
+        
+        # Calculate profit/loss
+        cost_basis = holding['average_price'] * quantity
+        profit_loss = sale_value - cost_basis
+        
+        # Execute the transaction
+        if date is None:
+            if self.simulation.mode == "realtime" and self.simulation.realtime_simulator:
+                date = self.simulation.realtime_simulator.current_date.strftime('%Y-%m-%d')
+            else:
+                date = datetime.now().strftime('%Y-%m-%d')
+        
+        transaction = {
+            'type': 'sell',
+            'symbol': symbol,
+            'quantity': quantity,
+            'price': price,
+            'fee': fee,
+            'total': net_proceeds,
+            'profit_loss': profit_loss,
+            'date': date,
+            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        }
+        
+        # Update portfolio
+        portfolio['cash'] += net_proceeds
+        
+        # Update holding
+        holding['shares'] -= quantity
+        if holding['shares'] == 0:
+            # Remove holding if no shares left
+            del portfolio['holdings'][symbol]
+        else:
+            # No need to update average price when selling
+            holding['total_cost'] = holding['average_price'] * holding['shares']
+        
+        # Add transaction to history
+        portfolio['transactions'].append(transaction)
+        
+        # Update portfolio value
+        self.update_portfolio_value(portfolio_name)
+        
+        logger.info(f"Sold {quantity} shares of {symbol} from portfolio '{portfolio_name}'")
+        return transaction
+    
+    def update_portfolio_value(self, portfolio_name):
+        """
+        Update the current value of a portfolio.
+        
+        Args:
+            portfolio_name (str): Portfolio name
+            
+        Returns:
+            float: Current portfolio value
+        """
+        if portfolio_name not in self.portfolios:
+            logger.error(f"Portfolio '{portfolio_name}' does not exist")
+            return None
+        
+        portfolio = self.portfolios[portfolio_name]
+        cash = portfolio['cash']
+        holdings_value = 0
+        
+        # Calculate value of holdings
+        for symbol, holding in portfolio['holdings'].items():
+            # Get current price
+            current_price = None
+            
+            if self.simulation.mode == "realtime" and self.simulation.realtime_simulator:
+                # Get price from realtime simulator
+                intraday_data = self.simulation.realtime_simulator.get_intraday_data(symbol)
+                if symbol in intraday_data:
+                    current_price = intraday_data[symbol]['last']
+            
+            if current_price is None:
+                # Get latest price from historical data or company info
+                company_info = self.simulation.company_info.get(symbol)
+                if company_info and 'price' in company_info:
+                    current_price = company_info['price'].get('close')
+            
+            if current_price is not None:
+                value = current_price * holding['shares']
+                holdings_value += value
+                
+                # Update holding with current price and value
+                holding['current_price'] = current_price
+                holding['current_value'] = value
+                holding['profit_loss'] = value - holding['total_cost']
+                holding['profit_loss_pct'] = (holding['profit_loss'] / holding['total_cost']) * 100 if holding['total_cost'] > 0 else 0
+        
+        # Calculate total value
+        total_value = cash + holdings_value
+        
+        # Record value in history
+        date = None
+        if self.simulation.mode == "realtime" and self.simulation.realtime_simulator:
+            date = self.simulation.realtime_simulator.current_date.strftime('%Y-%m-%d')
+        else:
+            if self.simulation.data_generator and self.simulation.data_generator.stock_data is not None:
+                latest_date = self.simulation.data_generator.stock_data.index.get_level_values(0).max()
+                date = latest_date.strftime('%Y-%m-%d')
+            else:
+                date = datetime.now().strftime('%Y-%m-%d')
+        
+        value_record = {
+            'date': date,
+            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'cash': cash,
+            'holdings': holdings_value,
+            'total': total_value
+        }
+        
+        portfolio['history'].append(value_record)
+        
+        return total_value
+    
+    def update_all_portfolios(self):
+        """
+        Update all portfolios with current values.
+        
+        Returns:
+            dict: Dictionary mapping portfolio names to their current values
+        """
+        values = {}
+        for name in self.portfolios:
+            values[name] = self.update_portfolio_value(name)
+        
+        return values
+    
+    def get_portfolio(self, portfolio_name, with_history=False):
+        """
+        Get a portfolio's current state.
+        
+        Args:
+            portfolio_name (str): Portfolio name
+            with_history (bool, optional): Whether to include transaction history, defaults to False
+            
+        Returns:
+            dict: Portfolio information
+        """
+        if portfolio_name not in self.portfolios:
+            logger.error(f"Portfolio '{portfolio_name}' does not exist")
+            return None
+        
+        portfolio = self.portfolios[portfolio_name]
+        
+        # Get current values
+        self.update_portfolio_value(portfolio_name)
+        
+        # Create a copy without history if not requested
+        if not with_history:
+            result = {
+                'name': portfolio['name'],
+                'cash': portfolio['cash'],
+                'holdings': portfolio['holdings'],
+                'created_at': portfolio['created_at']
+            }
+            
+            # Add the latest value from history
+            if portfolio['history']:
+                latest = portfolio['history'][-1]
+                result['latest_value'] = {
+                    'date': latest['date'],
+                    'cash': latest['cash'],
+                    'holdings': latest['holdings'],
+                    'total': latest['total']
+                }
+            
+            return result
+        else:
+            # Return full portfolio including history
+            return portfolio
+    
+    def get_portfolio_performance(self, portfolio_name, start_date=None, end_date=None):
+        """
+        Get performance metrics for a portfolio over a specified period.
+        
+        Args:
+            portfolio_name (str): Portfolio name
+            start_date (str, optional): Start date for analysis
+            end_date (str, optional): End date for analysis
+            
+        Returns:
+            dict: Dictionary with performance metrics
+        """
+        if portfolio_name not in self.portfolios:
+            logger.error(f"Portfolio '{portfolio_name}' does not exist")
+            return None
+        
+        portfolio = self.portfolios[portfolio_name]
+        
+        # Ensure portfolio value is up to date
+        self.update_portfolio_value(portfolio_name)
+        
+        if not portfolio['history']:
+            logger.warning(f"Portfolio '{portfolio_name}' has no history")
+            return {
+                'return': 0,
+                'return_pct': 0,
+                'start_value': 0,
+                'end_value': 0,
+                'period': 'N/A'
+            }
+        
+        # Filter history by date if specified
+        history = portfolio['history']
+        if start_date:
+            history = [record for record in history if record['date'] >= start_date]
+        
+        if end_date:
+            history = [record for record in history if record['date'] <= end_date]
+        
+        if not history:
+            logger.warning(f"No history found for the specified date range")
+            return {
+                'return': 0,
+                'return_pct': 0,
+                'start_value': 0,
+                'end_value': 0,
+                'period': 'No data'
+            }
+        
+        # Calculate performance metrics
+        start_value = history[0]['total']
+        end_value = history[-1]['total']
+        absolute_return = end_value - start_value
+        percent_return = (absolute_return / start_value) * 100 if start_value > 0 else 0
+        
+        # Calculate period
+        start_date_actual = history[0]['date']
+        end_date_actual = history[-1]['date']
+        period = f"{start_date_actual} to {end_date_actual}"
+        
+        # Calculate additional metrics
+        try:
+            # Convert history to DataFrame for easier analysis
+            df = pd.DataFrame(history)
+            df['date'] = pd.to_datetime(df['date'])
+            df = df.set_index('date')
+            
+            # Calculate daily returns
+            daily_returns = df['total'].pct_change()
+            
+            metrics = {
+                'return': absolute_return,
+                'return_pct': percent_return,
+                'start_value': start_value,
+                'end_value': end_value,
+                'period': period,
+                'volatility': daily_returns.std() * 100,  # Convert to percentage
+                'max_drawdown': self._calculate_max_drawdown(df['total']) * 100,  # Convert to percentage
+                'sharpe_ratio': self._calculate_sharpe_ratio(daily_returns)
+            }
+            
+            return metrics
+        except Exception as e:
+            logger.error(f"Error calculating performance metrics: {str(e)}")
+            
+            # Return basic metrics if advanced calculations fail
+            return {
+                'return': absolute_return,
+                'return_pct': percent_return,
+                'start_value': start_value,
+                'end_value': end_value,
+                'period': period
+            }
+    
+    def _calculate_max_drawdown(self, series):
+        """
+        Calculate maximum drawdown from a series of values.
+        
+        Args:
+            series (pd.Series): Series of values
+            
+        Returns:
+            float: Maximum drawdown as a decimal (not percentage)
+        """
+        # Calculate running maximum
+        running_max = series.cummax()
+        
+        # Calculate drawdown
+        drawdown = (series - running_max) / running_max
+        
+        # Get maximum drawdown
+        return drawdown.min()
+    
+    def _calculate_sharpe_ratio(self, returns, risk_free_rate=0.05/252):
+        """
+        Calculate Sharpe ratio from a series of returns.
+        
+        Args:
+            returns (pd.Series): Series of returns
+            risk_free_rate (float, optional): Daily risk-free rate, defaults to 5% annual / 252
+            
+        Returns:
+            float: Sharpe ratio
+        """
+        excess_returns = returns - risk_free_rate
+        
+        # Annualize (assuming daily returns)
+        sharpe = np.sqrt(252) * excess_returns.mean() / excess_returns.std()
+        
+        return sharpe
