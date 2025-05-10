@@ -29,7 +29,7 @@ Built by [Aayush Acharya](https://github.com/acharya-aayush), this project focus
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/nepsezen.git
+git clone https://github.com/acharya-aayush/nepsezen.git
 cd nepsezen
 ```
 
