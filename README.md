@@ -1,7 +1,4 @@
 # NEPSEZEN - Nepal Stock Exchange Simulator
-
-![NEPSEZEN](https://via.placeholder.com/800x200/0077B6/FFFFFF?text=NEPSEZEN)
-
 ## Overview
 
 NEPSEZEN is a comprehensive stock market simulation and analytics platform designed specifically for the Nepal Stock Exchange (NEPSE). The platform provides a realistic market environment for investors, analysts, and students to practice trading strategies, analyze market patterns, and understand the dynamics of the Nepalese stock market. 
@@ -69,10 +66,6 @@ Generate sample historical data:
 python main.py --mode generate --days 365
 ```
 
-## Contributing
-
-We welcome contributions to NEPSEZEN! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
 ## Known Issues and Future Improvements
 
 ### Current Limitations
@@ -89,15 +82,10 @@ We welcome contributions to NEPSEZEN! Please see our [CONTRIBUTING.md](CONTRIBUT
 - Develop mobile-responsive dashboard
 - Improve technical indicator accuracy
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
 - Nepal Stock Exchange (NEPSE) for public data and market specifications
-- Financial analysts and traders who provided domain expertise
-- Open source community for various libraries used in this project
 - AI assistants (ChatGPT, Claude, GitHub Copilot) for development support
 
 ## Contact
